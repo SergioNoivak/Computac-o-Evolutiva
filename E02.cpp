@@ -19,6 +19,7 @@ Senão, copie seu pai.
              Até parada
 */
 
+
 default_random_engine generator((unsigned) time(NULL));
 
 typedef struct ind {
@@ -73,11 +74,10 @@ double mutar(double valor) {
     uniform_real_distribution<double> distribution(-0.5,0.5);
     double perturbacao= distribution(generator);
     valor+=perturbacao;
-
-    if (valor > 4){
+    if (valor >= 4){
         valor = 4;
     }
-    else if (valor < 0) {
+    else if (valor <= 0) {
         valor = 0;
     }
 
@@ -129,7 +129,7 @@ int main() {
         }
         contador_de_geracoes++;
     }
-    while(contador_de_geracoes<100);
+    while(contador_de_geracoes<400);
 
     print_vetor(vetor,10);
     return 0;
