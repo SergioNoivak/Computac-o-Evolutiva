@@ -4,8 +4,6 @@
  # algoritmo da roleta e selecao 
  No código algoritmo_da_roleta_e_selecao_natural.cpp simulamos o processo evolutivo da seguinte forma:<br>
  <u> Precisamos encontrar um máximo para a função</u> x*sin(10*PI*x)+5; (funcao que chamamos de fitness)<br>
- 
- <br>
  <br>
 i-) cria-se um vetor(populacao).<br>
 ii-)preenche todas as posicoes com numeros aleatorios no intervalo [0,4].<br>
