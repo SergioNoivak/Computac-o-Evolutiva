@@ -69,15 +69,18 @@ int selecionar(individuo* vetor, int size_v, double soma) {
 }
 
 
+
+/**
+    A mutacao se da por meio de um acrescimo de um numero aleatório entre -0.5 e +0.5
+*/
 double mutar(double valor) {
 
     uniform_real_distribution<double> distribution(-0.5,0.5);
     double perturbacao= distribution(generator);
     valor+=perturbacao;
-    if (valor >= 4){
+    if (valor >= 4) {
         valor = 4;
-    }
-    else if (valor <= 0) {
+    } else if (valor <= 0) {
         valor = 0;
     }
 
@@ -85,57 +88,74 @@ double mutar(double valor) {
 }
 
 
-void print_vetor(individuo* vetor,int size_v){
+void print_vetor(individuo* vetor,int size_v) {
 
-cout<<endl;
-cout<<"{";
-    for(int i=0;i<size_v;i++)
+    cout<<endl;
+    cout<<"{";
+    for(int i=0; i<size_v; i++)
         cout<<"("<<vetor[i].valor<<" , "<<vetor[i].aptidao<<" )"<<endl;
 
 }
 
 
 int main() {
+
+
+    ///cria um vetor(populacao)
     individuo vetor[10];
     individuo novo_vetor[10];
     int i=0;
     int contador_de_geracoes=0;
+
+    ///preenche todas as posicoes com numeros aleatorios no intervalo [0,4]
     criar_populacao_inicial(vetor,10);
-    //print_vetor(vetor,10);
     do {
+
+        ///calcula soma das aptidoes
         double soma= soma_aptidoes(vetor,10);
         i=0;
         do {
 
+            /**
+            para o algoritmo que seleciona na roleta passamos a soma das aptidoes
+            isso se faz necessario pois os individuos com maior aptidão serão os individuos
+            com maiores chances de ser escolhidos
+            */
             int index=selecionar(vetor,10,soma);
+
+            /**
+            ao ser escolhido, esse elemento sofre uma mutacao
+            */
+
             double novo_valor=mutar(vetor[index].valor);
+
+
             double nova_aptidao=fitness(novo_valor);
+            ///Se o individuo for mais apto ele assume a posicao do anterior
             if(nova_aptidao>=vetor[index].aptidao) {
                 novo_vetor[i].valor=novo_valor;
                 novo_vetor[i].aptidao = nova_aptidao;
 
-            } else {
+            }
+            ///Senao o individuo eh descartado e o antigo toma o seu lugar
+            else {
                 novo_vetor[i].valor=vetor[index].valor;
                 novo_vetor[i].aptidao = vetor[index].aptidao;
             }
             i++;
         } while(i<10);
-        //print_vetor(novo_vetor,10);
 
         ///passar pro antigo o vetor novo
-        for(int coun=0;coun<10;coun++){
-         vetor[coun].valor=novo_vetor[coun].valor;
-         vetor[coun].aptidao=novo_vetor[coun].aptidao;
+        for(int coun=0; coun<10; coun++) {
+            vetor[coun].valor=novo_vetor[coun].valor;
+            vetor[coun].aptidao=novo_vetor[coun].aptidao;
         }
         contador_de_geracoes++;
-    }
-    while(contador_de_geracoes<400);
+    } while(contador_de_geracoes<400); ///*o processo foi simulado para 400 geracoes
 
     print_vetor(vetor,10);
     return 0;
 }
 /**
-
     (3.85026 , 8.85013)
-
 */
