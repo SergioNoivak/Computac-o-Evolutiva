@@ -1,7 +1,7 @@
 # Computac-o-Evolutiva
  Disciplina cursada em 2017 onde, por meio de experimentos, simulamos processos genéticos e evolutivos
  
- # algoritmo da roleta e selecao 
+ # algoritmo da roleta e selecao(ESTRATÉGIA 1+1)
  No código algoritmo_da_roleta_e_selecao_natural.cpp simulamos o processo evolutivo da seguinte forma:<br>
  <u> Precisamos encontrar um máximo para a função</u> x*sin(10*PI*x)+5; (funcao que chamamos de fitness)<br>
  <br>
